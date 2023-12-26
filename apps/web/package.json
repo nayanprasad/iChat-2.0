@@ -11,9 +11,11 @@
   "dependencies": {
     "@repo/ui": "workspace:*",
     "dotenv": "^16.3.1",
+    "lucide-react": "^0.302.0",
     "next": "^14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-scroll-to-bottom": "^4.2.0",
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
+    "@types/react-scroll-to-bottom": "^4.2.4",
     "eslint": "^8.53.0",
     "typescript": "^5.2.2"
   }

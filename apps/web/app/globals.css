@@ -48,3 +48,129 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+
+
+.chatPage{
+  /*background-image: url("../../images/chatBg3.png");*/
+  background-color: rgb(22, 21, 21);
+  width : 100vw;
+  height : 100vh;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.chatContainer{
+  border-radius: 1vmax 1vmax;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(129, 126, 126, 0.2), 0 6px 20px 0 rgba(88, 64, 64, 0.19);
+  background-color: white;
+  height: 60%;
+  width: 50%;
+}
+
+.header{
+  background-color: crimson;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+}
+.header > h2{
+  color : white;
+  margin: 1.2vmax;
+}
+.header > svg{
+  width: 1vmax;
+  height: 1vmax;
+  margin: 1.9vmax;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.header > svg:hover{
+  transform: scale(1.5);
+}
+
+.chatBox{
+  border-bottom: 0.2vmax solid black;
+  height: 70%;
+  box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+.inputBox{
+  height: 15%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+#chatInput{
+  width: 80%;
+  border: none;
+  padding: 2vmax;
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  font-size: 1.5vmax;
+  font-weight: 500;
+}
+
+.sendBtn{
+  background-color: rgb(255, 1, 52);
+  color: white;
+  border: none;
+  width: 21%;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-size: 1.2vmax;
+}
+
+.sendBtn:hover{
+  background-color: rgb(151, 8, 8);
+}
+.sendBtn > svg{
+  width: 3vmax;
+  transition: all 0.3s;
+}
+.sendBtn:hover svg {
+  transform: translateX(10px);
+}
+
+
+
+
+.messageBox{
+  /* max-width: 80%; */
+  padding: 1vmax;
+  margin: 1vmax;
+  border-radius: 0.5vmax;
+  display: inline-block;
+  clear: both;
+  font-size: 1.2vmax;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.8s;
+}
+
+
+.right{
+  float: right;
+  text-align: right;
+  background-color: rgb(7, 189, 240);
+  color: white;
+}
+
+.left{
+  float: left;
+  text-align: left;
+  background-color: rgb(41, 190, 61);
+  color: white;
+}
+
+
+
+.middle{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(196, 255, 184);
+}
