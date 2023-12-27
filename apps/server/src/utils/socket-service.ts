@@ -20,8 +20,8 @@ class SocketService {
         const io = this._io;
         io.on("connect", (socket) => {
             console.log(`new connection : ${socket.id}`);
-            io.on("event:message", async ({message}: {message: string}) => {
-                console.log(message)
+            socket.on("event:message", async ({message}: {message: string}) => {
+                console.log("message received", message)
             })
         })
     }

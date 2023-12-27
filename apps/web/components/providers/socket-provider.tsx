@@ -1,6 +1,6 @@
 "use client"
-import React, {useContext, createContext, useCallback, useEffect} from 'react';
-import { io as ClientIO } from "socket.io-client";
+import React, {useState, useContext, createContext, useCallback, useEffect} from 'react';
+import { io as ClientIO, Socket } from "socket.io-client";
 
 
 interface SocketProviderProps {
@@ -25,15 +25,23 @@ export const useSocket = () => {
 
 const SocketProvider = ({children}: SocketProviderProps) => {
 
+    const  [socket, setSocket] = useState<Socket | null>(null);
+
     const sendMessage: SocketContextType["sendMessage"] = useCallback((message) => {
         console.log("Sending message", message);
-    }, []);
+        if(socket) {
+            console.log("Sending to server")
+            socket.emit("event:message", {message});
+        }
+
+    }, [socket]);
 
     useEffect(() => {
         const socket = new (ClientIO as any)(process.env.NEXT_PUBLIC_SITE_URL);
-
+        setSocket(socket);
         return  () => {
             socket.disconnect();
+            setSocket(null)
         }
     }, []);
 

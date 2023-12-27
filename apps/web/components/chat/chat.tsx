@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 import {X, SendHorizontal} from "lucide-react";
-import ReactScrollToBottom from "react-scroll-to-bottom";
 import Message from "./message";
 import {useSocket} from "../providers/socket-provider";
 
@@ -128,7 +127,7 @@ const Chat = () => {
                     <h2>iChat</h2>
                     <X/>
                 </div>
-                <ReactScrollToBottom className="chatBox">
+                <div className="chatBox">
                     {messages && messages.map((item: any, i: number) =>
                         <Message
                             key={i}
@@ -138,7 +137,7 @@ const Chat = () => {
                         />
                     )}
 
-                </ReactScrollToBottom>
+                </div>
                 <div className="inputBox">
                     <input type="text" id="chatInput" value={message} onChange={(e) => setMessage(e.target.value)}
                            onKeyPress={(event) => event.key === 'Enter' ? handSend() : null}/>
