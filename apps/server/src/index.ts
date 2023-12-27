@@ -1,7 +1,9 @@
 import http from 'http';
 import express from 'express';
 import SocketService from "./utils/socket-service.js";
+import {configDotenv} from "dotenv";
 
+configDotenv();
 const app = express();
 const PORT = process.env.PORT || 8000;
 

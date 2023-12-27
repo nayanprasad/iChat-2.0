@@ -1,4 +1,11 @@
-import {Server} from "socket.io"
+import {Server} from "socket.io";
+import Redis from "ioredis";
+import {configDotenv} from "dotenv";
+configDotenv();
+
+const redisUri = process.env.REDIS_URI || "redis://localhost:6379";
+const pub = new Redis(redisUri);
+const sub = new Redis(redisUri);
 
 class SocketService {
     private _io: Server;
@@ -10,6 +17,7 @@ class SocketService {
                 origin: "*"
             }
         });
+        // sub.subscribe("MESSAGES")
     }
     get io(): Server {
         return this._io;
