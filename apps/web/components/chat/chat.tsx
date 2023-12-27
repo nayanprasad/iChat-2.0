@@ -3,6 +3,7 @@ import React from 'react';
 import {X, SendHorizontal} from "lucide-react";
 import ReactScrollToBottom from "react-scroll-to-bottom";
 import Message from "./message";
+import {useSocket} from "../providers/socket-provider";
 
 
 const messages = [
@@ -111,10 +112,13 @@ const messages = [
 
 const Chat = () => {
 
-    const [id, setId] = React.useState("1")
+    const {sendMessage} = useSocket();
+    const [id, setId] = React.useState("1");
+    const [message, setMessage] = React.useState("");
 
     const handSend = () => {
-        console.log("send")
+        sendMessage(message);
+        setMessage("");
     }
 
     return (
@@ -136,7 +140,7 @@ const Chat = () => {
 
                 </ReactScrollToBottom>
                 <div className="inputBox">
-                    <input type="text" id="chatInput"
+                    <input type="text" id="chatInput" value={message} onChange={(e) => setMessage(e.target.value)}
                            onKeyPress={(event) => event.key === 'Enter' ? handSend() : null}/>
                     <button onClick={handSend} className="sendBtn">
                         <SendHorizontal/>

@@ -8,15 +8,19 @@ interface SocketProviderProps {
 }
 
 interface SocketContextType {
-    sendMessage: (message: string) => void;
-    socket: any | null;
-    isConnected: boolean;
+    sendMessage: (message: string) => any;
+    // messages: string[];
 }
 
 
-export const SocketContext = createContext(null);
+export const SocketContext = createContext<SocketContextType | null>(null);
 
-export const useSocket = () => useContext(SocketContext);
+export const useSocket = () => {
+    const context = useContext(SocketContext);
+    if(!context)
+        throw new Error("useSocket undefined");
+    return context;
+};
 
 
 const SocketProvider = ({children}: SocketProviderProps) => {
@@ -35,7 +39,7 @@ const SocketProvider = ({children}: SocketProviderProps) => {
 
 
     return (
-        <SocketContext.Provider value={null}>
+        <SocketContext.Provider value={{ sendMessage }}>
             {children}
         </SocketContext.Provider>
     );
