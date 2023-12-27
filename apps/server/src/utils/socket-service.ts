@@ -17,7 +17,8 @@ class SocketService {
                 origin: "*"
             }
         });
-        // sub.subscribe("MESSAGES")
+        sub.subscribe("MESSAGES");
+        console.log("subscribed to messages")
     }
     get io(): Server {
         return this._io;
@@ -29,8 +30,19 @@ class SocketService {
         io.on("connect", (socket) => {
             console.log(`new connection : ${socket.id}`);
             socket.on("event:message", async ({message}: {message: string}) => {
-                console.log("message received", message)
+                console.log("message received", message);
+                // pub.set("message", message)
+                await pub.publish("MESSAGES", JSON.stringify({message}), (err, res) => {
+                    console.log("published message to redis", res);
+                });
             })
+        });
+
+        sub.on("message", (channel, message) => {
+            if(channel === "MESSAGES") {
+                console.log("message received from redis", message);
+                io.emit("event:message", message);
+            }
         })
     }
 }
