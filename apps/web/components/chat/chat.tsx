@@ -1,8 +1,10 @@
 "use client";
-import React from 'react';
+import React, {useEffect} from 'react';
 import {X, SendHorizontal} from "lucide-react";
 import Message from "./message";
 import {useSocket} from "../providers/socket-provider";
+import {redirect} from "next/navigation";
+import {UserMessages} from "../providers/socket-provider";
 
 
 const messagesHard = [
@@ -111,16 +113,25 @@ const messagesHard = [
 
 const Chat = () => {
 
-    const {sendMessage, messages} = useSocket();
+    const {sendMessage, messages, user} = useSocket();
     const [id, setId] = React.useState("1");
     const [message, setMessage] = React.useState("");
 
     console.log("messages", messages)
 
     const handSend = () => {
-        sendMessage(message);
+        const data = {
+            user,
+            message
+        }
+        sendMessage(data);
         setMessage("");
     }
+
+    useEffect(() => {
+        if(!user)
+            redirect("/");
+    }, []);
 
     return (
         <div className="chatPage">
@@ -130,12 +141,12 @@ const Chat = () => {
                     <X/>
                 </div>
                 <div className="chatBox">
-                    {messages && messages.map((item: any, i: number) =>
+                    {messages?.map((item: UserMessages, i: number) =>
                         <Message
                             key={i}
-                            user={item.id === id ? "" : item.user}
+                            user={item.user === user ? "" : item.user}
                             message={item.message}
-                            classs={item.id === id ? "right" : "left"}
+                            classs={item.user === user ? "right" : "left"}
                         />
                     )}
 

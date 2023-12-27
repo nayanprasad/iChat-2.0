@@ -1,11 +1,11 @@
 import {Fragment} from "react";
-import JoinChat from "../components/chat/join-chat";
+import Chat from "../../components/chat/chat";
 
 
 export default function Page() {
     return (
         <Fragment>
-            <JoinChat />
+            <Chat />
         </Fragment>
     )
 }

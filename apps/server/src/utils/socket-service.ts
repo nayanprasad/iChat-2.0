@@ -29,19 +29,19 @@ class SocketService {
         const io = this._io;
         io.on("connect", (socket) => {
             console.log(`new connection : ${socket.id}`);
-            socket.on("event:message", async ({message}: {message: string}) => {
-                console.log("message received", message);
+            socket.on("event:message", async ({user, message}: {user: string, message: string}) => {
+                console.log(`${user}: ${message}`);
                 // pub.set("message", message)
-                await pub.publish("MESSAGES", JSON.stringify({message}), (err, res) => {
+                await pub.publish("MESSAGES", JSON.stringify({user, message}), (err, res) => {
                     console.log("published message to redis", res);
                 });
             })
         });
 
-        sub.on("message", (channel, message) => {
+        sub.on("message", (channel, data) => {
             if(channel === "MESSAGES") {
-                console.log("message received from redis", message);
-                io.emit("event:message", message);
+                console.log("message received from redis", data);
+                io.emit("event:message", JSON.parse(data));
             }
         })
     }

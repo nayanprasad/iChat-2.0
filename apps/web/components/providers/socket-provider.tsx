@@ -2,16 +2,20 @@
 import React, {useState, useContext, createContext, useCallback, useEffect} from 'react';
 import { io as ClientIO, Socket } from "socket.io-client";
 
-
 interface SocketProviderProps {
     children?: React.ReactNode;
 }
 
-interface SocketContextType {
-    sendMessage: (message: string) => any;
-    messages: string[];
+export type UserMessages = {
+    user: string,
+    message: string
 }
-
+interface SocketContextType {
+    sendMessage: (data: UserMessages) => any;
+    setUserName: (user: string) => any;
+    user: string
+    messages: UserMessages[];
+}
 
 export const SocketContext = createContext<SocketContextType | null>(null);
 
@@ -27,21 +31,28 @@ const SocketProvider = ({children}: SocketProviderProps) => {
 
     const  [socket, setSocket] = useState<Socket | null>(null);
     const [messages, setMessages] = useState<SocketContextType["messages"]>([]);
+    const [user, setUser] = useState<SocketContextType["user"]>("");
 
-    const sendMessage: SocketContextType["sendMessage"] = useCallback((message) => {
-        console.log("Sending message", message);
+    const sendMessage: SocketContextType["sendMessage"] = useCallback((data) => {
+        console.log("Sending message", data);
         if(socket) {
             console.log("Sending to server")
-            socket.emit("event:message", {message});
+            socket.emit("event:message", data);
         }
 
     }, [socket]);
 
 
-    const receiveMessages = useCallback((message: string) => {
-        console.log("Received message", message);
-        setMessages((messages) => [...messages, message]);
+    const receiveMessages = useCallback((data: UserMessages) => {
+        console.log("Received message", data["user"], data.message);
+        setMessages((messages) => [...messages, data]);
     }, []);
+
+    const setUserName = useCallback((user: string) => {
+        console.log("user name: ", user);
+        setUser(user);
+    }, []);
+
 
     useEffect(() => {
         const socket = new (ClientIO as any)(process.env.NEXT_PUBLIC_SITE_URL);
@@ -56,7 +67,7 @@ const SocketProvider = ({children}: SocketProviderProps) => {
 
 
     return (
-        <SocketContext.Provider value={{ sendMessage, messages }}>
+        <SocketContext.Provider value={{ user, setUserName, sendMessage, messages}}>
             {children}
         </SocketContext.Provider>
     );

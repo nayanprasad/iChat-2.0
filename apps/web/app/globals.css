@@ -174,3 +174,64 @@ a {
   text-align: center;
   background-color: rgb(196, 255, 184);
 }
+
+
+
+/*JOIN*/
+
+.JoinPage{
+  background-color: rgb(22, 21, 21);
+  width : 100vm;
+  height : 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.JoinContainer{
+  /* border: 2px solid white; */
+  width : 50%;
+  height : 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.JoinContainer > img{
+  width : 10vmax;
+}
+
+.JoinContainer > h1{
+  color: white;
+  font-size: 2.5vmax;
+  width : 310px;
+  border-bottom: 0.2vmax solid white;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  padding: 1vmax;
+}
+
+#joinInput{
+  width: 25vmax;
+  padding: 1vmax;
+  border: none;
+  outline: none;
+  font-size: 1.2vmax;
+  margin: 2vmax;
+  box-sizing: border-box;
+}
+
+.joinbtn{
+  width: 25vmax;
+  padding: 1vmax;
+  border: none;
+  color: white;
+  outline: 1.2vmax;
+  background-color: rgb(248, 8, 56);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.joinbtn:hover{
+  background-color: rgb(197, 25, 59);
+}
