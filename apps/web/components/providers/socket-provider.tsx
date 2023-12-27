@@ -9,7 +9,7 @@ interface SocketProviderProps {
 
 interface SocketContextType {
     sendMessage: (message: string) => any;
-    // messages: string[];
+    messages: string[];
 }
 
 
@@ -26,6 +26,7 @@ export const useSocket = () => {
 const SocketProvider = ({children}: SocketProviderProps) => {
 
     const  [socket, setSocket] = useState<Socket | null>(null);
+    const [messages, setMessages] = useState<SocketContextType["messages"]>([]);
 
     const sendMessage: SocketContextType["sendMessage"] = useCallback((message) => {
         console.log("Sending message", message);
@@ -36,10 +37,18 @@ const SocketProvider = ({children}: SocketProviderProps) => {
 
     }, [socket]);
 
+
+    const receiveMessages = useCallback((message: string) => {
+        console.log("Received message", message);
+        setMessages((messages) => [...messages, message]);
+    }, []);
+
     useEffect(() => {
         const socket = new (ClientIO as any)(process.env.NEXT_PUBLIC_SITE_URL);
+        socket.on("event:message", receiveMessages);
         setSocket(socket);
         return  () => {
+            socket.off("event:message", receiveMessages);
             socket.disconnect();
             setSocket(null)
         }
@@ -47,7 +56,7 @@ const SocketProvider = ({children}: SocketProviderProps) => {
 
 
     return (
-        <SocketContext.Provider value={{ sendMessage }}>
+        <SocketContext.Provider value={{ sendMessage, messages }}>
             {children}
         </SocketContext.Provider>
     );

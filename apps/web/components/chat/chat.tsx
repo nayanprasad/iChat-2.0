@@ -5,7 +5,7 @@ import Message from "./message";
 import {useSocket} from "../providers/socket-provider";
 
 
-const messages = [
+const messagesHard = [
     {
         id: "1",
         user: "Admin",
@@ -111,9 +111,11 @@ const messages = [
 
 const Chat = () => {
 
-    const {sendMessage} = useSocket();
+    const {sendMessage, messages} = useSocket();
     const [id, setId] = React.useState("1");
     const [message, setMessage] = React.useState("");
+
+    console.log("messages", messages)
 
     const handSend = () => {
         sendMessage(message);
