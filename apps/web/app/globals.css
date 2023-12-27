@@ -28,6 +28,32 @@
   margin: 0;
 }
 
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #ffffff;
+  /* border-radius: 10px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #979696;
+  /* border-radius: 5px; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /*transform: scale(1.2);*/
+  background: rgb(79, 79, 79);
+}
+
+
 html,
 body {
   max-width: 100vw;
@@ -49,7 +75,7 @@ a {
   text-decoration: none;
 }
 
-
+/*CHAT*/
 
 .chatPage{
   /*background-image: url("../../images/chatBg3.png");*/
@@ -75,15 +101,15 @@ a {
   height: 15%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 1vmax;
 }
+
 .header > h2{
   color : white;
   margin: 1.2vmax;
 }
 .header > svg{
-  width: 1vmax;
-  height: 1vmax;
-  margin: 1.9vmax;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -95,7 +121,7 @@ a {
   border-bottom: 0.2vmax solid black;
   height: 70%;
   box-sizing: border-box;
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 .inputBox{
@@ -111,7 +137,7 @@ a {
   box-sizing: border-box;
   background-color: rgb(255, 255, 255);
   outline: none;
-  font-size: 1.5vmax;
+  font-size: 1vmax;
   font-weight: 500;
 }
 
@@ -137,7 +163,7 @@ a {
 }
 
 
-
+/*MESSAGE BOX*/
 
 .messageBox{
   /* max-width: 80%; */
@@ -155,14 +181,14 @@ a {
 .right{
   float: right;
   text-align: right;
-  background-color: rgb(7, 189, 240);
+  background-color: rgb(41, 190, 61);
   color: white;
 }
 
 .left{
   float: left;
   text-align: left;
-  background-color: rgb(41, 190, 61);
+  background-color: rgb(7, 189, 240);
   color: white;
 }
 
@@ -172,7 +198,7 @@ a {
   display: flex;
   justify-content: center;
   text-align: center;
-  background-color: rgb(196, 255, 184);
+  background-color: rgb(148, 44, 62);
 }
 
 
@@ -181,7 +207,7 @@ a {
 
 .JoinPage{
   background-color: rgb(22, 21, 21);
-  width : 100vm;
+  width : 100vw;
   height : 100vh;
   display: flex;
   justify-content: center;
@@ -190,16 +216,13 @@ a {
 
 .JoinContainer{
   /* border: 2px solid white; */
-  width : 50%;
-  height : 50%;
+  /*width : 50%;*/
+  /*height : 50%;*/
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.JoinContainer > img{
-  width : 10vmax;
-}
 
 .JoinContainer > h1{
   color: white;
@@ -212,7 +235,8 @@ a {
 }
 
 #joinInput{
-  width: 25vmax;
+  width: 100%;
+  min-height: 4vh;
   padding: 1vmax;
   border: none;
   outline: none;
@@ -222,7 +246,7 @@ a {
 }
 
 .joinbtn{
-  width: 25vmax;
+  width: 100%;
   padding: 1vmax;
   border: none;
   color: white;
@@ -233,5 +257,5 @@ a {
   cursor: pointer;
 }
 .joinbtn:hover{
-  background-color: rgb(197, 25, 59);
+  background-color: rgb(117, 23, 41);
 }

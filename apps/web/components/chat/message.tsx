@@ -1,34 +1,20 @@
 import React from 'react';
 
 interface MessageProps {
-    user: string,
-    message: string,
-    classs: string,
+    user: string;
+    message: string;
+    classs: string;
 }
 
-const Message = ({user, message, classs}: MessageProps) => {
-    if (user) {
-        if (user === "Admin") {
-            return (
-                <div className="messageBox middle">
-                    {`${user} : ${message}`}
-                </div>
-            )
-        } else {
-            return (
-                <div className={`messageBox ${classs}`}>
-                    {`${user} : ${message}`}
-                </div>
-            )
-        }
-    }
+const Message: React.FC<MessageProps> = ({ user, message, classs }: MessageProps) => {
+    const isAdmin = user === 'Admin';
+    const sender = user || 'You';
 
     return (
-        <div className={`messageBox ${classs}`}>
-            {`You : ${message}`}
+        <div className={`messageBox ${isAdmin ? 'middle' : classs}`}>
+            {`${sender} : ${message}`}
         </div>
-    )
+    );
+};
 
-}
-
-export default Message
+export default Message;
