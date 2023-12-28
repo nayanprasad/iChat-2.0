@@ -2,6 +2,7 @@ import http from 'http';
 import express from 'express';
 import SocketService from "./utils/socket-service.js";
 import {configDotenv} from "dotenv";
+import {consumeMessages} from "./utils/kafka-consumer";
 
 configDotenv();
 const app = express();
@@ -10,6 +11,11 @@ const PORT = process.env.PORT || 8000;
 
 
 (async () => {
+    consumeMessages().then(() => {
+        console.log("message consumed successfully");
+    }).catch((err) => {
+        console.error("CONSUME_MESSAGE: ", err);
+    });
     const httpServer = http.createServer();
     SocketService.io.attach(httpServer);
     httpServer.listen(PORT, () => {
