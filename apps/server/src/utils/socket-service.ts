@@ -1,6 +1,5 @@
 import {Server} from "socket.io";
 import Redis from "ioredis";
-import {connectKafka} from "./kafka-admin";
 import {produceMessage} from "./kafka-producer";
 import {configDotenv} from "dotenv";
 import {UserType} from "../type";
@@ -25,12 +24,6 @@ class SocketService {
         });
         sub.subscribe("MESSAGES");
         console.log("subscribed to messages");
-
-        connectKafka().then(() => {
-            console.log("connected to kafka");
-        }).catch((err) => {
-            console.error(err);
-        });
     }
     get io(): Server {
         return this._io;
