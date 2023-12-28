@@ -16,6 +16,8 @@ the same time without any problem, utilising Redis and Kafka.
 - Socket.io
 - Redis
 - Kafka
+- PostgresSQL
+- Prisma
 - Next.js
 
 
