@@ -1,5 +1,6 @@
 import {Server} from "socket.io";
 import Redis from "ioredis";
+import DB from "./prisma"
 import {configDotenv} from "dotenv";
 configDotenv();
 
@@ -35,6 +36,12 @@ class SocketService {
                 await pub.publish("MESSAGES", JSON.stringify({user, message}), (err, res) => {
                     console.log("published message to redis", res);
                 });
+                await DB.message.create({
+                    data: {
+                        user,
+                        message
+                    }
+                })
             })
         });
 
