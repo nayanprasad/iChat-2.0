@@ -1,5 +1,0 @@
-class SocketService {
-    constructor() {
-    }
-}
-export {};

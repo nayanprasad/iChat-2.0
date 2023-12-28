@@ -1,15 +1,11 @@
 import http from 'http';
-import express from 'express';
-import SocketService from "./utils/socket-service.js";
+import SocketService from "./services/socket-service.js";
 import {configDotenv} from "dotenv";
-import {consumeMessages} from "./utils/kafka-consumer";
-import {connectKafka} from "./utils/kafka-admin";
+import {consumeMessages} from "./services/kafka-consumer";
+import {connectKafka} from "./services/kafka-admin";
 
 configDotenv();
-const app = express();
 const PORT = process.env.PORT || 8000;
-
-
 
 (async () => {
     connectKafka().then(() => {
