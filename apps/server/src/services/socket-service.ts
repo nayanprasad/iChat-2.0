@@ -10,7 +10,7 @@ configDotenv();
 
 const redisUri = process.env.REDIS_URI || "redis://localhost:6379";
 const pub = new Redis(redisUri);
-const sub = new Redis(redisUri);
+    const sub = new Redis(redisUri);
 
 class SocketService {
     private _io: Server;
